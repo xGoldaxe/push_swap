@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 19:49:58 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/03 20:06:30 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:47:57 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static int	reverse_stack(t_stack *stack)
 	int	i;
 	int	tmp;
 
-	i = stack->size - 1;
+	i = -1;
 	if (stack->size >= 1)
 	{
-		tmp = stack->v[i];
-		while (--i >= 0)
-			stack->v[i + 1] = stack->v[i];
-		stack->v[0] = tmp;
+		tmp = stack->v[0];
+		while (++i < stack->size - 1)
+			stack->v[i] = stack->v[i + 1];
+		stack->v[i] = tmp;
 		return (0);
 	}
 	return (-1);

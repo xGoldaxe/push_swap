@@ -1,6 +1,9 @@
 SRC = main.c \
 ft_atoi.c \
 stack_utils.c \
+sort_three.c \
+sort_five.c \
+utils.c \
 
 CC = gcc
 

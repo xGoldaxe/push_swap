@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 19:38:04 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/03 20:06:27 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:48:01 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static int	rotate_stack(t_stack *stack)
 	int	i;
 	int	tmp;
 
-	i = -1;
+	i = stack->size - 1;
 	if (stack->size >= 1)
 	{
-		tmp = stack->v[0];
-		while (++i < stack->size - 1)
-			stack->v[i] = stack->v[i + 1];
-		stack->v[i] = tmp;
+		tmp = stack->v[i];
+		while (--i >= 0)
+			stack->v[i + 1] = stack->v[i];
+		stack->v[0] = tmp;
 		return (0);
 	}
 	return (-1);

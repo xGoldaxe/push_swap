@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:32:05 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/03 20:33:32 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:35:26 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,17 @@
 
 int	sort_stack(t_stack *stack_a, t_stack *stack_b)
 {
-	operation(RA, stack_a, stack_b);
-	//here we select the right algorithm for our A size
+	if (verify_sorted_stack(stack_a))
+		return (1);
+	else if (stack_a->size == 2)
+	{
+		if (stack_a->v[0] < stack_a->v[1])
+			operation(SA, stack_a, stack_b);
+	}
+	else if (stack_a->size == 3)
+		sort_three(stack_a, stack_b);
+	else if ((stack_a->size) <= 5)
+		sort_five(stack_a, stack_b);
 	return (0);
 }
 
@@ -23,12 +32,9 @@ void	print_stack(t_stack	*stack)
 {
 	int	i;
 
-	i = 0;
-	while (i < stack->size)
-	{
+	i = stack->size;
+	while (i--)
 		printf("%d\n", stack->v[i]);
-		++i;
-	}
 	printf("the stack sort is: %d\n", verify_sorted_stack(stack));
 }
 

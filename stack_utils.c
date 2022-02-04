@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:58:43 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/03 20:20:09 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:40:28 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,43 @@ int	verify_sorted_stack(t_stack *stack)
 	last = stack->v[0];
 	while (++i < stack->size)
 	{
-		if (last > stack->v[i])
+		if (last < stack->v[i])
 			return (0);
 		last = stack->v[i];
 	}
 	return (1);
+}
+
+int	stack_test_value(t_stack *stack, int (*f_test)(int value_a, int value_b))
+{
+	int	i;
+	int	best_value;
+	int	index;
+
+	if (stack->size)
+	{
+		best_value = stack->v[0];
+		index = 0;
+		i = stack->size;
+		while (--i)
+		{
+			if (f_test(stack->v[i], best_value))
+			{
+				best_value = stack->v[i];
+				index = i;
+			}
+		}
+		return (index);
+	}
+	return (-1);
+}
+
+int	stack_lower(t_stack *stack)
+{
+	return (stack_test_value(stack, is_lower));
+}
+
+int	stack_higher(t_stack *stack)
+{
+	return (stack_test_value(stack, is_higher));
 }
