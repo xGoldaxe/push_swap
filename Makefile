@@ -3,7 +3,9 @@ ft_atoi.c \
 stack_utils.c \
 sort_three.c \
 sort_five.c \
+sort_regular.c \
 utils.c \
+lis.c \
 
 CC = gcc
 

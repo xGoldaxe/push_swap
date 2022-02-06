@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:32:05 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/04 14:35:26 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/06 18:01:53 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b)
 	}
 	else if (stack_a->size == 3)
 		sort_three(stack_a, stack_b);
-	else if ((stack_a->size) <= 5)
+	else if (stack_a->size <= 5)
 		sort_five(stack_a, stack_b);
+	else if (stack_a->size > 5)
+		sort_regular(stack_a, stack_b);
 	return (0);
 }
 
@@ -47,9 +49,9 @@ int	*store_stack(char **stack_str, int stack_size)
 	if (!stack)
 		return (NULL);
 	i = 0;
-	while (i < stack_size)
+	while (--stack_size >= 0)
 	{
-		stack[i] = ft_atoi(stack_str[i]);
+		stack[i] = ft_atoi(stack_str[stack_size]);
 		++i;
 	}
 	return (stack);

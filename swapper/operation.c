@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 20:22:19 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/03 20:57:36 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:19:12 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	operation_print(int operation_index)
 {	
-	static char	value[36] = "sa\nsb\nss\npa\npb\nra\nrb\nrr\nrra\nrrb\nrrr\n";
+	static char	value[36] = "sa*sb*ss*pa*pb*ra*rb*rr*rra*rrb*rrr*";
 
 	if (operation_index >= 0 && operation_index <= 11)
 	{
 		operation_index *= 3;
 		--operation_index;
-		while (value[++operation_index] != '\n')
+		while (value[++operation_index] != '*')
 			write(1, &value[operation_index], 1);
 		write(1, "\n", 1);
 		return (0);

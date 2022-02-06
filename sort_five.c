@@ -6,41 +6,33 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 12:59:25 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/04 18:07:47 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:56:33 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* find the rigt index in a sorted stack */
+/* find the right index in a sorted stack */
 
 int	stack_find_insert_index(t_stack *stack, int value)
 {
 	int	i;
-	int	anomaly;
+	int	tmp;
 
-	anomaly =- 1;
-	i = 0;
-	while (i < stack->size)
+	tmp = stack_higher(stack);
+	if (value > stack->v[tmp])
+		return (tmp);
+	tmp = stack_lower(stack);
+	if (value < stack->v[tmp])
+		return (tmp);
+	i = stack->size;
+	while (--i)
 	{
-		if (stack->v[i] < stack->v[i + 1])
-			anomaly = i + 1;
-		++i;
-	}
-	i = 0;
-	while (i < stack->size)
-	{
-		if (value > stack->v[i] && i == 0)
-		{
-			if (anomaly == -1 || value < stack->v[stack->size - 1])
-				return (i);
-		}
-		else if (value > stack->v[i] && value < stack->v[i - 1])
+		if (value > stack->v[i] && value < stack->v[i - 1])
 			return (i);
-		else if (stack->v[i] < stack->v[i + 1] && value > stack->v[i + 1])
-			return (i + 1);
-		++i;
 	}
+	if (value > stack->v[0] && value < stack->v[stack->size - 1])
+		return (0);
 	return (-1);
 }
 
@@ -51,11 +43,9 @@ int	stack_insert(t_stack *stack_a, t_stack *stack_b)
 
 	insert_index = stack_find_insert_index(stack_a,
 				stack_b->v[stack_b->size - 1]);
-	printf("index is %d ||", insert_index);
-	return 0;
-	if (insert_index > stack_a->size / 2)
+	if (insert_index < stack_a->size / 2)
 	{
-		printf("add at top\n");
+		// printf("sort top, %d\n", stack_b->v[stack_b->size - 1]);
 		i = stack_a->size - insert_index;
 		while (--i)
 			operation(RA, stack_a, stack_b);
@@ -65,7 +55,6 @@ int	stack_insert(t_stack *stack_a, t_stack *stack_b)
 	}
 	else
 	{
-		printf("add at bottom\n");
 		i = insert_index + 1;
 		while (--i)
 			operation(RRA, stack_a, stack_b);
@@ -74,25 +63,35 @@ int	stack_insert(t_stack *stack_a, t_stack *stack_b)
 	return (0);
 }
 
+int	stack_merge(t_stack *stack_a, t_stack *stack_b)
+{
+	while (stack_b->size)
+		stack_insert(stack_a, stack_b);
+	return (0);
+}
+
+int	stack_bubble(t_stack *stack_a, t_stack *stack_b)
+{
+	if (stack_higher(stack_a) > stack_a->size / 2)
+	{
+		while (stack_lower(stack_a) != stack_a->size - 1)
+			operation(RRA, stack_a, stack_b);
+	}
+	else
+	{
+		while (stack_lower(stack_a) != stack_a->size - 1)
+			operation(RA, stack_a, stack_b);
+	}
+	return (0);
+}
+
 int	sort_five(t_stack *stack_a, t_stack *stack_b)
 {
-	operation(PB, stack_a, stack_b);
+	if (stack_a->size == 5)
+		operation(PB, stack_a, stack_b);
 	operation(PB, stack_a, stack_b);
 	sort_stack(stack_a, stack_b);
-
-	printf("index is %d ||\n", stack_find_insert_index(stack_a,
-				3));
-	return 0;
-	while (stack_b->size)
-	{
-		stack_insert(stack_a, stack_b);
-		printf("=====top=====\n");
-		print_stack(stack_a);
-		printf("=============\n");
-	}
-	// print_stack(stack_a);
-	// printf("=============\n");
-	// while (!verify_sorted_stack(stack_a))
-	// 	operation(RA, stack_a, stack_b);
+	stack_merge(stack_a, stack_b);
+	stack_bubble(stack_a, stack_b);
 	return (0);
 }
