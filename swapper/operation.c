@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 20:22:19 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/06 17:19:12 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:34:00 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,23 @@
 
 int	operation_print(int operation_index)
 {	
-	static char	value[36] = "sa*sb*ss*pa*pb*ra*rb*rr*rra*rrb*rrr*";
+	static char	value[40] = "sa\nsb\nss\npa\npb\nra\nrb\nrr\nrra\nrrb\nrrr\n";
+	int			i;
+	int			actual_word;
 
 	if (operation_index >= 0 && operation_index <= 11)
 	{
-		operation_index *= 3;
-		--operation_index;
-		while (value[++operation_index] != '*')
-			write(1, &value[operation_index], 1);
+		i = 0;
+		actual_word = 0;
+		while (actual_word < operation_index)
+		{
+			if (value[i] == '\n')
+				++actual_word;
+			++i;
+		}
+		--i;
+		while (value[++i] && value[i] != '\n')
+			write(1, &value[i], 1);
 		write(1, "\n", 1);
 		return (0);
 	}
@@ -40,5 +49,6 @@ int	operation(int operation_index, t_stack *stack_a, t_stack *stack_b)
 		operation_print(operation_index);
 		return (swap[operation_index](stack_a, stack_b));
 	}
+	printf("UNKNOW OP\n");
 	return (-2);
 }

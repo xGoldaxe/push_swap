@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 12:28:10 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/06 18:06:27 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:39:18 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,28 +64,61 @@ t_stack *stack_b, t_stack *stack_lis)
 	return (0);
 }
 
+int	get_number_operation(t_stack *stack_a, int value)
+{
+	int	i;
+	int	insert_index;
+	int	operations;
+
+	operations = 0;
+	insert_index = stack_find_insert_index(stack_a,
+				value);
+	//calculate the number of RRA and RRB needed, also SA and SB
+	//number of operations = |RRA - RRB| + |SA - SB|
+	if (insert_index >= stack_a->size / 2)
+	{
+		i = stack_a->size - insert_index - 1;
+		insert_index = i;
+		while (i > 0)
+		{
+			operations++;
+			--i;
+		}
+		operations++;
+		// if (stack_a->v[stack_a->size - 1] > stack_a->v[stack_a->size - 2])
+		// 	operation(SA, stack_a, stack_b);
+	}
+	else
+	{
+		i = insert_index;
+		while (i > 0)
+		{
+			operations++;
+			--i;
+		}
+		operations++;
+		operations++;
+		// if (stack_a->v[stack_a->size - 1] > stack_a->v[stack_a->size - 2])
+		// {
+		// 	operation(SA, stack_a, stack_b);
+		// }
+	}
+	return (operations);
+}
+
 int	stack_insert_operations(t_stack *stack_a, t_stack *stack_b)
 {
-	int	insert_index;
 	int	number_of_operations;
 	int	best_number_of_operations;
 	int	best_index;
 	int	i;
 
-	best_index = stack_b->size - 1;
 	best_number_of_operations = -1;
 	i = stack_b->size;
-	while (--i)
+	while (--i >= 0)
 	{
-		insert_index = stack_find_insert_index(stack_a,
-					stack_b->v[stack_b->size - 1]);
-		number_of_operations = 0;
-		if (insert_index > stack_a->size / 2)
-			number_of_operations += stack_a->size - insert_index + 1;
-		else
-			number_of_operations += insert_index + 1;
-		if (best_number_of_operations == -1 ||
-			number_of_operations < best_number_of_operations)
+		number_of_operations = get_number_operation(stack_a, stack_b->v[i]);
+		if (number_of_operations < best_number_of_operations || best_number_of_operations == -1)
 		{
 			best_number_of_operations = number_of_operations;
 			best_index = i;
@@ -98,7 +131,8 @@ int	stack_insert_index(t_stack *stack_a, t_stack *stack_b, int index)
 {
 	int	i;
 
-	if (index < (stack_b->size / 2 + stack_b->size % 2))
+	stack_insert(stack_a, stack_b);
+	if (index < stack_b->size / 2)
 	{
 		i = 0;
 		while (i < index)
@@ -109,7 +143,7 @@ int	stack_insert_index(t_stack *stack_a, t_stack *stack_b, int index)
 	}
 	else
 	{
-		i = stack_b->size - index + 1 + 1;
+		i = stack_b->size - index + 1;
 		while (--i)
 			operation(RRB, stack_a, stack_b);
 	}
@@ -126,25 +160,9 @@ int sort_regular(t_stack *stack_a, t_stack *stack_b)
 	if (!stack_lis)
 		exit(0);
 	push_out_from_stack(stack_a, stack_b, stack_lis);
-	int	i;
-	int	best;
-	int	index;
-	int	test;
 	while (stack_b->size)
-	{
-		i = 0;
-		best = -1;
-		while (i < stack_b->size)
-		{
-			test = stack_insert_operations(stack_a, stack_b);
-			if (best == -1 || test < best)
-				index = i;
-			++i;
-		}
-		stack_insert_index(stack_a, stack_b, index);
-	}
+		stack_insert_index(stack_a, stack_b, stack_insert_operations(stack_a, stack_b));
 	stack_bubble(stack_a, stack_b);
-	// print_stack(stack_a);
 	free(stack_lis);
     return (0);
 }
