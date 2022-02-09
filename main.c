@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:32:05 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/08 18:40:59 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:16:17 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	main(int argc, char **argv)
 	}
 	sort_stack(&stack_a, &stack_b);
 	print_stack(&stack_a);
+	printf("operations: %d\n", operation(-2, NULL, NULL));
 	free(stack_a.v);
 	free(stack_b.v);
 	return (0);

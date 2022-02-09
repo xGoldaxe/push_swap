@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 20:22:19 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/08 18:34:00 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:23:24 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,17 @@ int	operation(int operation_index, t_stack *stack_a, t_stack *stack_b)
 		&swap_sa, &swap_sb, &swap_ss, &push_pa, &push_pb, &rotate_ra,
 		&rotate_rb, &rotate_rr, &reverse_rra, &reverse_rrb, &reverse_rrr
 	};
-
+	static int	call = 0;
+	
+	if (operation_index == -1)
+	{
+		call = 0;
+		return (0);
+	}
+	else if (operation_index == -2)
+		return (call);
+	else
+		++call;
 	if (operation_index >= 0 && operation_index <= 11)
 	{
 		operation_print(operation_index);

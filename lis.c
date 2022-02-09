@@ -68,6 +68,7 @@ t_stack *lis(int *A, int size)
 			--tmp;
 		}
 	}
+	res->size += 1;
 	// priting lis
 	// printf("LIS: ");
 	// for (i = 0; i < res->size+1; ++i) {
