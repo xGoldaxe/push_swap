@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:34:44 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/10 17:21:20 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/10 18:32:45 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ typedef struct s_operations
 	int	rrr;
 }	t_operations;
 
+/* OTHERS */
+int				clean_exit(t_stack *stack_a, t_stack *stack_b);
+
+/* PARSING */
+int				*store_stack(char **stack_str, int stack_size);
+
 /* STACK UTILS */
 int				verify_sorted_stack(t_stack *stack);
 int				stack_lower(t_stack *stack);
@@ -49,6 +55,8 @@ t_operations	*get_number_operation(t_stack *stack_a, int value,
 					t_operations *operations);
 int				push_out_from_stack(t_stack *stack_a, t_stack *stack_b,
 					t_stack *stack_lis);
+int				stack_merge(t_stack *stack_a, t_stack *stack_b);
+
 /* SORT ALGO */
 int				sort_three(t_stack *stack_a, t_stack *stack_b);
 int				sort_five(t_stack *stack_a, t_stack *stack_b);
@@ -62,6 +70,10 @@ int				ft_abs(int nbr);
 t_stack			*stack_to_lis(t_stack *stack);
 void			*free_stack(t_stack *stack);
 t_stack			*stack_cpy(t_stack *src, t_stack *dst, int size);
+int				get_anomaly(t_stack *stack_a);
+int				stack_bubble(t_stack *stack_a, t_stack *stack_b);
+int				ft_strcmp(char *s1, char *s2);
+int				ft_strlen(char *str);
 
 /* OPERATIONS */
 t_operations	*operations_default(t_operations *operations);

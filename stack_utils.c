@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:58:43 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/10 17:20:23 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/10 17:58:30 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ t_stack	*stack_cpy(t_stack *src, t_stack *dst, int size)
 	int	i;
 
 	dst->v = malloc(sizeof(int) * size);
+	if (!dst->v)
+		return (NULL);
 	dst->size = src->size;
 	i = 0;
 	while (i < src->size)

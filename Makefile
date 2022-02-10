@@ -2,12 +2,14 @@ SRC = main.c \
 ft_atoi.c \
 stack_utils.c \
 sort_three.c \
-sort_five.c \
 sort_regular.c \
 utils.c \
 lis.c \
 operations_type.c \
 stack_utils2.c \
+stack_utils3.c \
+stack_insert.c \
+parsing.c \
 
 CC = gcc
 
