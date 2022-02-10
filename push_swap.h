@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:34:44 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/10 18:32:45 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:00:56 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ typedef struct s_operations
 
 /* OTHERS */
 int				clean_exit(t_stack *stack_a, t_stack *stack_b);
+int				sort_with_lis(t_stack *stack_a, t_stack *stack_b,
+					int iter, int print_op);
+int				sort_regular_iter(t_stack *stack_a, t_stack *stack_b,
+					t_stack *stack_lis);
+int				lis_error(t_stack *stack_a, t_stack *stack_b, int *a, int *b);
 
 /* PARSING */
 int				*store_stack(char **stack_str, int stack_size);

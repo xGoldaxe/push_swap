@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 17:17:06 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/10 18:02:13 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:11:30 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,36 @@ int	search_replace(int *lis, int left, int right, int key)
 	return (mid + 1);
 }
 
+t_stack	*lis2(int *A, t_stack *res, int size, int *index)
+{
+	int	tmp;
+	int	i;
+
+	res->v = (int *)malloc((res->size + 1) * sizeof(int));
+	if (!res->v)
+	{
+		free(res);
+		free(index);
+		return (NULL);
+	}
+	tmp = res->size;
+	i = size;
+	while (--i >= 0)
+	{
+		if (index[i] == tmp)
+		{
+			res->v[tmp] = A[size - i - 1];
+			--tmp;
+		}
+	}
+	res->size += 1;
+	free(index);
+	return (res);
+}
+
 t_stack	*lis(int *A, int size)
 {
 	int		i;
-	int		tmp;
 	t_stack	*res;
 	int		*lis;
 	int		*index;
@@ -71,21 +97,8 @@ t_stack	*lis(int *A, int size)
 		if (res->size < index[i])
 			res->size = index[i];
 	}
-	res->v = (int *)malloc((res->size + 1) * sizeof(int));
-	tmp = res->size;
-	i = size;
-	while (--i >= 0)
-	{
-		if (index[i] == tmp)
-		{
-			res->v[tmp] = A[size - i - 1];
-			--tmp;
-		}
-	}
-	res->size += 1;
 	free(lis);
-	free(index);
-	return (res);
+	return (lis2(A, res, size, index));
 }
 
 t_stack	*stack_to_lis(t_stack *stack)
