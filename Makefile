@@ -6,6 +6,8 @@ sort_five.c \
 sort_regular.c \
 utils.c \
 lis.c \
+operations_type.c \
+stack_utils2.c \
 
 CC = gcc
 

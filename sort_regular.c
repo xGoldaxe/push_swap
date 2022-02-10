@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 12:28:10 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/09 17:11:12 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:20:05 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_stack *stack_b, t_stack *stack_lis)
 	i = 0;
 	while (stack_a->size > stack_lis->size)
 	{
-		if (stack_a->v[stack_a->size - 1] == stack_lis->v[i])
+		if (ft_stack_include(stack_a->v[stack_a->size - 1], stack_lis))
 		{
 			operation(RA, stack_a, stack_b);
 			if (i < stack_lis->size - 1)

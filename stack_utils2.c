@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   stack_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 11:42:18 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/10 17:19:23 by pleveque         ###   ########.fr       */
+/*   Created: 2022/02/10 17:20:33 by pleveque          #+#    #+#             */
+/*   Updated: 2022/02/10 17:20:46 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_lower(int a, int b)
-{
-	return (a < b);
-}
+#include "push_swap.h"
 
-int	is_higher(int a, int b)
+void	*free_stack(t_stack *stack)
 {
-	return (a > b);
-}
-
-int	ft_abs(int nbr)
-{
-	if (nbr < 0)
-		return (-nbr);
-	return (nbr);
+	if (!stack)
+		return (NULL);
+	if (stack->v)
+		free(stack->v);
+	free(stack);
+	return (NULL);
 }

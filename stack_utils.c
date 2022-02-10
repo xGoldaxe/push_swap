@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:58:43 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/06 16:34:55 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/10 17:20:23 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,19 @@ int	stack_lower(t_stack *stack)
 int	stack_higher(t_stack *stack)
 {
 	return (stack_test_value(stack, is_higher));
+}
+
+t_stack	*stack_cpy(t_stack *src, t_stack *dst, int size)
+{
+	int	i;
+
+	dst->v = malloc(sizeof(int) * size);
+	dst->size = src->size;
+	i = 0;
+	while (i < src->size)
+	{
+		dst->v[i] = src->v[i];
+		++i;
+	}
+	return (dst);
 }
