@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:34:44 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/10 19:00:56 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/21 10:21:36 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ int				get_anomaly(t_stack *stack_a);
 int				stack_bubble(t_stack *stack_a, t_stack *stack_b);
 int				ft_strcmp(char *s1, char *s2);
 int				ft_strlen(char *str);
+char			**ft_split(const char *str, char charset);
+int				free_split(char **splited);
+int				split_size(char **splited);
 
 /* OPERATIONS */
 t_operations	*operations_default(t_operations *operations);

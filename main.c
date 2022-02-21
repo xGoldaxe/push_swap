@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:32:05 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/10 19:12:05 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/21 10:25:56 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,36 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b)
 	return (0);
 }
 
+t_stack	*get_stack_a(int argc, char **argv, t_stack *stack_a)
+{
+	char	**splited;
+
+	stack_a->size = -1;
+	if (argc > 2)
+	{
+		stack_a->size = argc - 1;
+		stack_a->v = store_stack(&argv[1], stack_a->size);
+	}
+	else if (argc == 2)
+	{
+		splited = ft_split(argv[1], ' ');
+		if (!splited)
+			return (stack_a);
+		stack_a->size = split_size(splited);
+		stack_a->v = store_stack(splited, stack_a->size);
+		free_split(splited);
+	}
+	return (stack_a);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
 	t_stack	stack_b;
 
-	stack_a.size = argc - 1;
-	stack_a.v = store_stack(&argv[1], stack_a.size);
+	stack_a = *get_stack_a(argc, argv, &stack_a);
+	if (stack_a.size == -1 || !stack_a.v)
+		return (0);
 	stack_b.v = malloc(sizeof(int) * stack_a.size);
 	stack_b.size = 0;
 	if (!stack_a.v || !stack_b.v)

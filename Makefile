@@ -4,6 +4,7 @@ stack_utils.c \
 sort_three.c \
 sort_regular.c \
 utils.c \
+utils2.c \
 lis.c \
 operations_type.c \
 stack_utils2.c \
@@ -11,6 +12,7 @@ stack_utils3.c \
 stack_insert.c \
 parsing.c \
 sort_funcs.c \
+split.c \
 
 CC = gcc
 
@@ -51,13 +53,19 @@ ${NAME} : $(OBJ)
 	@${CC} -o ${NAME} ${OBJ} swapper/swapper.a
 	@printf "${B_GREEN}==>{${NAME}} LINKED SUCCESFULLY<==${NONE}\n"
 
+bonus :
+	@cd checker_prog && make && cp checker ../
+
 clean :
 	@${RM} .build
+	@cd checker_prog && make clean
 	@printf "${B_RED}XX{${NAME}} CLEANED SUCCESFULLY XX${NONE}\n"
 
 fclean :	clean
 	@${RM} ${NAME}
 	@cd swapper && make fclean
+	@cd checker_prog && make fclean
+	@${RM} checker
 	@printf "${B_RED}XX{${NAME}} FCLEAN SUCCESFULL XX${NONE}\n"
 
 re :	fclean all

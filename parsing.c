@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 18:09:46 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/10 19:12:27 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/21 10:29:21 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	parse_error(int *stackv)
 {
 	free(stackv);
 	write(2, "Error\n", 6);
-	exit(0);
 	return (0);
 }
 
@@ -45,6 +44,8 @@ int	ft_onlynumber(char *str)
 	int	i;
 
 	i = 0;
+	if (!str[0])
+		return (0);
 	if (str[i] == '-')
 		++i;
 	while (str[i])
@@ -54,6 +55,20 @@ int	ft_onlynumber(char *str)
 		++i;
 	}
 	return (1);
+}
+
+int	ft_check_double(int *stackv, int size, int nbr)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (stackv[i] == nbr)
+			return (1);
+		++i;
+	}
+	return (0);
 }
 
 int	*store_stack(char **stack_str, int stack_size)
@@ -68,8 +83,10 @@ int	*store_stack(char **stack_str, int stack_size)
 	while (--stack_size >= 0)
 	{
 		if (ft_onlynumber(stack_str[stack_size]) == 0
-			|| is_integer(stack_str[stack_size]) == 0)
-			parse_error(stackv);
+			|| is_integer(stack_str[stack_size]) == 0
+			|| ft_check_double(stackv, i,
+				ft_atoi(stack_str[stack_size])) == 1)
+			return (parse_error(stackv), NULL);
 		stackv[i] = ft_atoi(stack_str[stack_size]);
 		++i;
 	}
