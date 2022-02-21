@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:34:44 by pleveque          #+#    #+#             */
-/*   Updated: 2022/02/10 19:54:19 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/02/21 10:38:57 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,15 @@ int		*store_stack(char **stack_str, int stack_size);
 /* STACK */
 int		verify_sorted_stack(t_stack *stack);
 int		clean_exit(t_stack *stack_a, t_stack *stack_b);
+t_stack	*get_stack_a(int argc, char **argv, t_stack *stack_a);
 
 /* UTILS */
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_atoi(const char *str);
 char	*get_next_line(int fd);
+int		split_size(char **splited);
+int		free_split(char **splited);
+char	**ft_split(const char *str, char charset);
 
 #endif

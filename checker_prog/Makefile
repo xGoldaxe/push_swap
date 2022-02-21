@@ -3,6 +3,8 @@ SRC = main.c \
 ../parsing.c \
 ../stack_utils.c \
 ../ft_atoi.c \
+../split.c \
+../utils2.c \
 
 CC = gcc
 
